@@ -1,0 +1,19 @@
+  VERSION="0.4.4"
+ CATEGORY="utility"
+ATTRIBUTE="console"
+   SOURCE="cpudyn.tgz"
+      URL="http://mnm.uib.es/~gallir/cpudyn/"
+ HOMEPAGE="http://mnm.uib.es/~gallir/cpudyn/"
+FRESHMEAT="cpudyn"
+    SHORT="cpudyn controls the processor's speed in response to load"
+      REQ=""
+cat << EOF
+cpudyn controls the speed in Intel SpeedStep, Pentium 4 Mobile
+and PowerPC machines with the cpufreq compiled in the kernel.
+By using cpudyn you should not not notice any performance
+impact, but nevertheless you should save battery consumption
+and reduce the temperature of your laptop.
+
+It can also set the spindown timeout on your hdd's
+(uncomment the other ARGS line in /etc/init.d/cpudyn.sh)
+EOF

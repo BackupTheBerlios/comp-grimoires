@@ -1,0 +1,12 @@
+  VERSION="4.3"
+ CATEGORY="utility kernel"
+ATTRIBUTE="console"
+   SOURCE="tpctl/thinkpad_${VERSION}.tar.gz"
+      URL="$SOURCEFORGE_URL"
+ HOMEPAGE="http://tpctl.sourceforge.net"
+#FRESHMEAT=""
+    SHORT="thinkpad contains the kernel module required for tpctl"
+      REQ=""
+cat << EOF
+thinkpad contains the kernel module required for tpctl
+EOF

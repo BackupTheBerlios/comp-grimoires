@@ -1,0 +1,18 @@
+  VERSION="4.4"
+ CATEGORY="utility"
+ATTRIBUTE="console"
+   SOURCE="tpctl/tpctl_${VERSION}.tar.gz"
+      URL="$SOURCEFORGE_URL"
+ HOMEPAGE="http://tpctl.sourceforge.net"
+FRESHMEAT="tpctl"
+    SHORT="tpctl is a command line tool for controling your IBM thinkpad"
+      REQ="thinkpad"
+cat << EOF
+Programs included in the most recent tpctl packages
+ * tpctl   - command line ThinkPad control program
+ * ntpctl  - ncurses ThinkPad control program
+ * tpctlir - a utility that enables or disables the infrared 
+              subsystem on ThinkPads with Programmable Option Select
+ * apmiser - a daemon that automatically controls power 
+              expenditure mode (using tpctl) according to CPU usage
+EOF
