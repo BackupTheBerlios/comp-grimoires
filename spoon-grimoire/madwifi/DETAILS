@@ -1,0 +1,17 @@
+   VERSION=( "20030802" )
+  CATEGORY="network kernel"
+ ATTRIBUTE="library module"
+       URL="$SOURCEFORGE_URL"
+    SOURCE="madwifi/madwifi-$VERSION"
+   ARCHIVE="off"
+  HOMEPAGE="http://sourceforge.net/projects/madwifi/"
+  ESTIMATE="45"
+     SHORT="madwifi installs a kernel driver for WiFi cards that use Multiband Atheros chipsets"
+cat << EOF
+A Linux device driver for 802.11a/b/g universal NIC cards -
+either Cardbus, PCI, or miniPCI - that use Atheros chip sets
+(ar5210, ar5211, ar5212). Documentation is slight at best,
+but seems to function well on some systems, unstable on others.
+Project is under steady development.
+It's partly closed source.
+EOF
