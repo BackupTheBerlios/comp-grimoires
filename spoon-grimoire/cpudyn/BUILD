@@ -5,14 +5,9 @@ make_install() {
 init_install() {
   cp $SCRIPT_DIR/cpudyn.sh /etc/init.d/
   if $CPUDYN_BOOT; then
+    ln  -sf  ../init.d/cpudyn.sh /etc/rcS.d/S99cpudyn
     ln  -sf  ../init.d/cpudyn.sh /etc/rc0.d/K00cpudyn
     ln  -sf  ../init.d/cpudyn.sh /etc/rc6.d/K00cpudyn
-
-    ln  -sf  ../init.d/cpudyn.sh /etc/rc1.d/S99cpudyn
-    ln  -sf  ../init.d/cpudyn.sh /etc/rc2.d/S99cpudyn
-    ln  -sf  ../init.d/cpudyn.sh /etc/rc3.d/S99cpudyn
-    ln  -sf  ../init.d/cpudyn.sh /etc/rc4.d/S99cpudyn
-    ln  -sf  ../init.d/cpudyn.sh /etc/rc5.d/S99cpudyn
   fi
 }
 

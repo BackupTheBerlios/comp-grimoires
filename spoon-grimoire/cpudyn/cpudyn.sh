@@ -7,7 +7,7 @@ start() {
   echo -n "Starting cpudynd: "
   cpudynd $ARGS
   if [ $? = 0 ]; then
-    echo "cpudynd."
+    echo "done."
   else
     echo "(failed.)"
   fi
@@ -16,7 +16,7 @@ start() {
 stop() {
   echo -n "Stopping cpudynd: "
   pkill cpudynd
-  echo "cpudynd."
+  echo "stopped."
 }
 
 case "$1" in
