@@ -1,9 +1,0 @@
-if  !  grep  -q  "CPUDYN_BOOT="  $SPELL_CONFIG;  then
-
-  if    query  "Invoke cpudyn at boot?" y
-  then  echo   "CPUDYN_BOOT=true"   >>  $SPELL_CONFIG
-  else  echo   "CPUDYN_BOOT=false"  >>  $SPELL_CONFIG
-  fi
-
-fi
-
