@@ -1,29 +1,6 @@
    VERSION=( "2.4.22-ac4" "2.4.22-ac2" )
-  CATEGORY="kernel"
- ATTRIBUTE="core noreap solo"
  SOURCE[0]="pub/linux/kernel/v2.4/linux-2.4.22"
  SOURCE[1]="pub/linux/kernel/people/alan/linux-2.4/2.4.22/patch-2.4.22-ac4.bz2"
-  HOMEPAGE="http://www.kernel.org"
     URL[0]="$KERNEL_URL"
     URL[1]="$URL[0]"
-    OPT[0]="modutils:::for tools for modular kernel"
-   ARCHIVE="off"
-  EPROVIDE="kernel linux"
- FRESHMEAT="linux"
-  ESTIMATE="5043"
-     SHORT="linux spell provides the stable releases of the kernel."
-cat << EOF
-Linux is a clone of the Unix kernel, 
-written from scratch by Linus Torvalds 
-with assistance from a loosely-knit 
-team of hackers across the Net.
-It aims towards POSIX and Single 
-UNIX Specification compliance.
-It has all the features you would 
-expect in a modern fully-fledged 
-Unix kernel, including true multitasking, 
-virtual memory, shared libraries, 
-demand loading, shared copy-on-write 
-executables, proper memory management, 
-and TCP/IP networking.
-EOF
+     SHORT="linux,2.4.22-ac4 is the latest stable kernel with alan cox's patches"

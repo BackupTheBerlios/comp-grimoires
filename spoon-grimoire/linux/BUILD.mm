@@ -1,0 +1,88 @@
+backup_modules()  {
+
+  if    [  -d  /lib/modules/$VERSION      ];  then
+    rm   -rf   /lib/modules/$VERSION.old
+    mv         /lib/modules/$VERSION      \
+               /lib/modules/$VERSION.old
+  fi
+
+}
+
+
+store_config()  {  cp  .config  $CONFIG_LOGS/$BSPELL/linux-config;  }
+
+
+copy_kernel()  {
+
+  cp  $(  find  .  -name  bzImage  )  /boot/$VERSION
+
+}
+
+
+run_make_menuconfig()  {
+
+  CONFIG_KERNEL="true"
+  while  $CONFIG_KERNEL; do
+    make  menuconfig
+    if    query  "Repeat menuconfig?" n
+    then  CONFIG_KERNEL=true
+    else  CONFIG_KERNEL=false
+    fi
+  done
+}
+
+
+restore_linux_configs()  {  (
+
+  CURRENT="$CONFIG_LOGS/$BSPELL/linux-config"
+      OLD="$CONFIG_LOGS/$BSPELL/linux-config.old"
+    LINUX="/usr/src/linux/.config"
+
+  if    [  -f   $CURRENT  ];  then  cp  $CURRENT  $LINUX
+  elif  [  -f   $OLD      ];  then  cp  $OLD      $LINUX;  run_make_menuconfig
+  else  run_make_menuconfig
+  fi
+
+)  }
+
+
+install_headers()  {
+
+  install_header_dir()  {
+    rm     -fr  /usr/include/$1
+    mkdir  -p   /usr/include/$1
+    cp     -rv       include/$1/*  \
+                /usr/include/$1
+  }
+
+  install_header_dir  asm
+  install_header_dir  asm-generic
+  install_header_dir  linux
+  true
+
+}
+
+case $VERSION in
+  2.6.0-test6-mm1)  mv /usr/src/linux-2.6.0-test6 /usr/src/linux-$VERSION
+                    cd /usr/src/linux
+                    bzcat  $(  guess_filename  ${SOURCE[1]}  )  |
+                    patch  -p1
+                    ;;
+esac
+
+restore_linux_configs
+activate_voyeur
+
+(
+  yes  n  |  make  oldconfig
+  store_config            &&
+  make  dep               &&
+  make  bzImage           &&
+  make  modules           &&
+  backup_modules          &&
+  prepare_install         &&
+  make   modules_install  &&
+  copy_kernel             &&
+  install_headers
+
+) > $C_FIFO 2>&1
