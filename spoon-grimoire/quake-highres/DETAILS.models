@@ -1,0 +1,10 @@
+  unset OPT
+  VERSION="20021117"
+   SOURCE="${VERSION}qmodels.zip"
+      URL="ftp://ftp.splatterworld.de/games/q1/models/"
+ HOMEPAGE="http://switch.to/qmodels"
+    SHORT="quake-highres,models includes new models and high res skins"
+cat << EOF
+quake-highres,models includes new models and high res skins for
+advanced quake 1 engins like tenebrae and darkplaces
+EOF

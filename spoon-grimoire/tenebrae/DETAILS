@@ -1,0 +1,13 @@
+  VERSION="1.04"
+SOURCE[0]="tenebrae_src.zip"
+SOURCE[1]="tenebraedata.zip"
+   URL[0]="http://tenebrae.sourceforge.net/downloads/"
+   URL[1]=${URL[0]}
+      REQ=""
+ HOMEPAGE="http://tenebrae.sourceforge.net"
+    SHORT="Tenebrae engine for quake1"
+cat << EOF
+Tenebrae engine for quake1
+quake1 must be installed to /usr/share/games/quake/
+requires DGA extensions to be enabled on the X server
+EOF

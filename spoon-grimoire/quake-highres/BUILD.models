@@ -1,0 +1,22 @@
+install_textures ()  {
+  cd override
+  mkdir  -p  $QUAKEDIR/id1/textures/
+  cp -av  *  $QUAKEDIR/id1/textures/
+  mkdir  -p  $QUAKEDIR/tenebrae/override/
+  for FILE in `ls`; do
+    ln  -sf  ../../id1/textures/$FILE  $QUAKEDIR/tenebrae/override/
+  done
+  cd ..
+}
+
+install_models () {
+  cp  -arv  maps progs   $QUAKEDIR/tenebrae/
+}
+
+
+QUAKEDIR="/usr/share/games/quake/"
+chmod a+r * -R
+prepare_install   &&
+install_textures  &&
+install_models
+

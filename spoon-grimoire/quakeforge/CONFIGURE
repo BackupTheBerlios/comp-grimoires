@@ -1,0 +1,30 @@
+if ! grep -q "OUT_GLX" $SPELL_CONFIG; then
+  if    query  "Enable opengl glx support?"  y
+  then  echo  "OUT_GLX=y" >> $SPELL_CONFIG
+  else  echo  "OUT_GLX=n" >> $SPELL_CONFIG
+  fi
+fi
+
+if ! grep -q "OUT_FBDEV" $SPELL_CONFIG; then
+  if    query  "Enable framebuffer support?"  y
+  then  echo  "OUT_FBDEV=y" >> $SPELL_CONFIG
+  else  echo  "OUT_FBDEV=n" >> $SPELL_CONFIG
+  fi
+fi
+
+if ! grep -q "BUILD_SERVERS" $SPELL_CONFIG; then
+  if    query  "Build dedicated servers?"  n
+  then  echo  "BUILD_SERVERS=y" >> $SPELL_CONFIG
+  else  echo  "BUILD_SERVERS=n" >> $SPELL_CONFIG
+  fi
+fi
+
+if ! grep -q "BUILD_TOOLS" $SPELL_CONFIG; then
+  if    query  "Build quakeforge tools?"  n
+  then  echo  "BUILD_TOOLS=y" >> $SPELL_CONFIG
+  else  echo  "BUILD_TOOLS=n" >> $SPELL_CONFIG
+  fi
+fi
+
+#hack
+#chmod u+x $SPELL_CONFIG

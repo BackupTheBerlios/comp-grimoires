@@ -1,0 +1,18 @@
+  VERSION="0.5.4"
+ CATEGORY="game"
+ATTRIBUTE="X11"
+   SOURCE="quake/quakeforge-$VERSION.tar.bz2"
+      URL="$SOURCEFORGE_URL"
+      REQ="quake"
+   OPT[0]="x11:--with-x::for X output"
+   OPT[1]="SDL:--with-sdl::for SDL graphics"
+   OPT[2]="svgalib:--with-svgalib::for svgalib output"
+   OPT[3]="libvorbis:--enable-vorbis:--disable-vorbis:for ogg-vorbis support"
+ HOMEPAGE="http://www.quakeforge.net/"
+    SHORT="quakeforge engine for quake"
+cat << EOF
+QuakeForge is a 3D graphics game engine based on id Software's
+legendary Quake and QuakeWorld game engine. Our purpose? To
+improve the state of the game by improving the engine and making
+it accessable to the largest number of players we can.
+EOF

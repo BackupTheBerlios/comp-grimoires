@@ -1,0 +1,169 @@
+diff -U2 -r unpatched/winquake/gl_vidlinux.c patched/winquake/gl_vidlinux.c
+--- unpatched/winquake/gl_vidlinux.c	2002-12-08 14:33:49.000000000 +1030
++++ patched/winquake/gl_vidlinux.c	2002-12-08 14:28:19.000000000 +1030
+@@ -34,5 +34,5 @@
+ 
+ #include "quakedef.h"
+-#include "GL/fxmesa.h"
++/*#include "GL/fxmesa.h"*/
+ 
+ #define WARP_WIDTH              320
+@@ -512,7 +512,7 @@
+ 		}
+         
+-	*width = 640;
+-	*height = 480;
+-	return GR_RESOLUTION_640x480;
++	*width = 1024;
++	*height = 768;
++	return GR_RESOLUTION_1024x768;
+ }
+ 
+@@ -611,5 +611,5 @@
+ 	GLint attribs[32];
+ 	char	gldir[MAX_OSPATH];
+-	int width = 640, height = 480;
++	int width = 1024, height = 768;
+ 
+ 	Init_KBD();
+diff -U2 -r unpatched/winquake/gl_vidlinuxglx.c patched/winquake/gl_vidlinuxglx.c
+--- unpatched/winquake/gl_vidlinuxglx.c	2002-12-08 14:33:49.000000000 +1030
++++ patched/winquake/gl_vidlinuxglx.c	2002-12-08 14:28:19.000000000 +1030
+@@ -127,5 +127,5 @@
+ 
+ 	XLookupString(ev, buf, sizeof buf, &keysym, 0);
+-
++	
+ 	switch(keysym)
+ 	{
+@@ -309,4 +309,6 @@
+ 
+ //	XSync(dpy, True);
++
++//	Con_Print("Grabs installed\n");
+ }
+ 
+@@ -328,4 +330,6 @@
+ 
+ 	mouse_active = false;
++
++//	Con_Print("Grabs uninstalled\n");
+ }
+ 
+@@ -342,7 +346,9 @@
+ 		return;
+ 
+-	while (XPending(dpy)) {
++	while (XPending(dpy)>0) {
+ 		XNextEvent(dpy, &event);
+ 
++		//Con_SafePrintf("Event Type %i\n", event.type);
++
+ 		switch (event.type) {
+ 		case KeyPress:
+@@ -354,4 +360,5 @@
+ 			if (mouse_active) {
+ 				if (dgamouse) {
++				//Con_SafePrintf("Motion Notify Event %i %i\n", mx, my);
+ 					mx += (event.xmotion.x + win_x) * 2;
+ 					my += (event.xmotion.y + win_y) * 2;
+@@ -397,4 +404,5 @@
+ 
+ 		case CreateNotify :
++			//Con_SafePrintf("Create Notify Event\n");
+ 			win_x = event.xcreatewindow.x;
+ 			win_y = event.xcreatewindow.y;
+@@ -402,4 +410,5 @@
+ 
+ 		case ConfigureNotify :
++			//Con_SafePrintf("Configure Notify Event\n");
+ 			win_x = event.xconfigure.x;
+ 			win_y = event.xconfigure.y;
+@@ -432,4 +441,6 @@
+ 
+ 	if (!mouse_active) {
++	//Con_SafePrintf("Mouse available %i aktive %i\n", mouse_avail, mouse_active);
++
+ 		mx = my = 0; // don't spazz
+ 		install_grabs();
+@@ -450,5 +461,7 @@
+ 			XDestroyWindow(dpy, win);
+ 		if (vidmode_active)
++		{
+ 			XF86VidModeSwitchToMode(dpy, scrnum, vidmodes[0]);
++		}
+ 		XCloseDisplay(dpy);
+ 	}
+@@ -701,5 +714,5 @@
+ 			vid_gamma = 1;
+ 		else
+-			vid_gamma = 0.7; // default to 0.7 on non-3dfx hardware
++			vid_gamma = 1.5; // default to 0.7 on non-3dfx hardware
+ 	} else
+ 		vid_gamma = Q_atof(com_argv[i+1]);
+@@ -732,5 +745,5 @@
+ 	};
+ 	char	gldir[MAX_OSPATH];
+-	int width = 640, height = 480;
++	int width = 1024, height = 768;
+ 	XSetWindowAttributes attr;
+ 	unsigned long mask;
+@@ -767,5 +780,5 @@
+ 		vid.conwidth = Q_atoi(com_argv[i+1]);
+ 	else
+-		vid.conwidth = 640;
++		vid.conwidth = 1024;
+ 
+ 	vid.conwidth &= 0xfff8; // make it a multiple of eight
+@@ -849,4 +862,5 @@
+ 	attr.colormap = XCreateColormap(dpy, root, visinfo->visual, AllocNone);
+ 	attr.event_mask = X_MASK;
++	
+ 	if (vidmode_active) {
+ 		mask = CWBackPixel | CWColormap | CWSaveUnder | CWBackingStore | 
+@@ -870,5 +884,7 @@
+ 		// Move the viewport to top left
+ 		XF86VidModeSetViewPort(dpy, scrnum, 0, 0);
++		//mouse_avail = true;
+ 	}
++	mouse_avail = true;
+ 
+ 	XFlush(dpy);
+@@ -904,4 +920,5 @@
+ 
+ 	Con_SafePrintf ("Video mode %dx%d initialized.\n", width, height);
++	Con_SafePrintf ("This Version of Quake has been hacked by mfcn <mfcn@gmx.de> ;-)\n");
+ 
+ 	vid.recalc_refdef = 1;				// force a surface cache flush
+@@ -933,4 +950,5 @@
+ void IN_Commands (void)
+ {
++	//Con_SafePrintf("IN_Commands called\n");
+ 	if (!dpy || !win)
+ 		return;
+diff -U2 -r unpatched/winquake/sys_linux.c patched/winquake/sys_linux.c
+--- unpatched/winquake/sys_linux.c	2002-12-08 14:33:49.000000000 +1030
++++ patched/winquake/sys_linux.c	2002-12-08 14:31:11.000000000 +1030
+@@ -24,5 +24,15 @@
+ int nostdout = 0;
+ 
++#if defined (BASEDIR)
++/* - DC - won't work without this  */
++#define macro_string(x) _macro_string(x)
++#define _macro_string(x) #x
++char *basedir = macro_string(BASEDIR);
++#undef macro_string
++#undef _macro_string
++#else
+ char *basedir = ".";
++#endif
++
+ char *cachedir = "/tmp";
+ 
+@@ -87,5 +97,5 @@
+ {
+ 	va_list		argptr;
+-	char		text[1024];
++	char		text[2024];
+ 	unsigned char		*p;
+ 

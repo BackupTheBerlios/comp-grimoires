@@ -1,0 +1,12 @@
+  VERSION="1.0"
+ CATEGORY="game"
+      REQ="quake"
+   OPT[0]="quake-highres,textures:::for high res textures in quake (84mb)"
+   OPT[1]="quake-highres,models:::for high res models in quake (20mb)"
+ HOMEPAGE=""
+    SHORT="quake-highres is a collection of high res textures and models for quake"
+cat << EOF
+high res textures and models from the following projects:
+quake 1 retexturing project - 84mb
+quake 1 remodelling project - 20mb 
+EOF

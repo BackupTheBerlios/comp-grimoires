@@ -1,0 +1,10 @@
+   unset OPT
+  VERSION="20030815"
+   SOURCE="${VERSION}qe1.zip"
+      URL="http://koth.tvnet.hu/%7Eq-retexture/"
+ HOMEPAGE="http://www.quake.cz/winclan/qe1/"
+    SHORT="quake-highres,retexturing high res textures quake"
+cat << EOF
+quake-highres,retexturing includes 84mb worth of high res textures
+for advanced quake 1 engines like tenebrea and darkplaces
+EOF

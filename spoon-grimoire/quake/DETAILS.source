@@ -1,0 +1,12 @@
+  VERSION="1.09"
+ CATEGORY="game"
+ATTRIBUTE="X11 concurrent"
+   SOURCE="q1source.zip"
+      URL="ftp://ftp.idsoftware.com/idstuff/source/"
+      REQ="x11 svgalib quake"
+ HOMEPAGE="http://www.idsoftware.com/"
+    SHORT="native linux version of quake"
+cat << EOF
+native linux version of quake
+requires DGA extensions to be enabled on the X server
+EOF

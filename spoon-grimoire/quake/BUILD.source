@@ -1,0 +1,10 @@
+  cd WinQuake
+  cp ${SCRIPT_DIR}/Makefile.winquake ${BUILD_DIR}/WinQuake/Makefile
+  sed -i "s:-g -mpentiumpro -O6:${CFLAGS}:" Makefile                    &&
+  sed -i "s:<mountdir>:$PWD:"           Makefile
+  patch -p2 < ${SCRIPT_DIR}/patch.winquake          &&
+
+  make build_release                              &&
+  prepare_install                                 &&
+  cd releasei386-glibc/bin                        &&
+  cp -a glquake.glx quake.x11 squake /usr/games
