@@ -1,0 +1,14 @@
+  VERSION="2.5"
+ CATEGORY="development"
+ATTRIBUTE="console"
+   SOURCE="jam-${VERSION}.zip"
+      URL="ftp://ftp.perforce.com/pub/jam"
+ HOMEPAGE="http://www.perforce.com/jam/jam.html"
+FRESHMEAT=""
+    SHORT="Jam is a software build tool that does the same function as gnumake"
+      REQ=""
+cat << EOF
+Jam is a software build tool that makes building
+simple things simple and building complicated
+things manageable. 
+EOF
