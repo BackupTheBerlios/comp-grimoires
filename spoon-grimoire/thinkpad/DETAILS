@@ -7,6 +7,7 @@ ATTRIBUTE="console"
 #FRESHMEAT=""
     SHORT="thinkpad contains the kernel module required for tpctl"
       REQ=""
+ ESTIMATE="20"
 cat << EOF
 thinkpad contains the kernel module required for tpctl
 EOF

@@ -7,6 +7,7 @@ ATTRIBUTE="console"
 FRESHMEAT="tpctl"
     SHORT="tpctl is a command line tool for controling your IBM thinkpad"
       REQ="thinkpad"
+ ESTIMATE="25"
 cat << EOF
 Programs included in the most recent tpctl packages
  * tpctl   - command line ThinkPad control program
