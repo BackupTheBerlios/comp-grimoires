@@ -4,3 +4,4 @@
     URL[0]="$KERNEL_URL"
     URL[1]="$URL[0]"
      SHORT="linux,2.4.22-ac4 is the latest stable kernel with alan cox's patches"
+  EPROVIDE="kernel linux crypto-api"

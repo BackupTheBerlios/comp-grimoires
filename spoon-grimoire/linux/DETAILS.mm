@@ -4,5 +4,5 @@
     URL[0]="$KERNEL_URL"
     URL[1]="$URL[0]"
     OPT[0]="module-init-tools:::for tools for modular kernel"
-  EPROVIDE="alsa,driver kernel linux"
+  EPROVIDE="alsa,driver kernel linux crypto-api"
      SHORT="2.6.0-test6-mm1 developmental kernel"
