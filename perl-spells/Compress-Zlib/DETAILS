@@ -1,0 +1,12 @@
+   VERSION=( "1.21" )
+  CATEGORY="library"
+ ATTRIBUTE="development"
+  HOMEPAGE="http://cpan.valueclick.com/modules/by-module/Compress/Compress-Zlib-$VERSION.readme"
+       URL="http://cpan.valueclick.com/modules/by-module/Compress"
+       REQ="perl zlib"
+     SHORT="This module provides a Perl interface to most of the zlib compression library"
+cat << EOF
+This module provides a Perl interface to most of the zlib compression
+library.  For more details see the pod documentation embedded in the
+file Zlib.pm.
+EOF
