@@ -1,0 +1,3 @@
+   VERSION=( "1.90" )
+    SOURCE="upx-${VERSION}-linux"
+       URL="http://upx.sourceforge.net/download/unstable/"

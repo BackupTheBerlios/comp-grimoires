@@ -1,0 +1,157 @@
+#!/bin/bash
+
+function compress_exe ()
+{
+  local EXEFILE="$1"
+  local UPXRESULT
+  rm   -rf $COMPDIR
+  mkdir -p $COMPDIR
+  upx $EXEFILE --best --crp-ms=999999 --nrv2b -o $COMPDIR/result_2b
+  upx $EXEFILE --best --crp-ms=999999 --nrv2d -o $COMPDIR/result_2d
+
+  if [ $? == 2 ]; then
+    echo "$EXEFILE already compressed with upx" | tee -a $LOGFILE
+    rm -rf $COMPDIR
+  fi
+
+  while [ -n "`ls $COMPDIR 2> /dev/null`" ]; do
+    SMALLER="$COMPDIR/`ls -S $COMPDIR | tail -1`"
+    if ( upx -tqqq $SMALLER ); then
+      if ( mv $SMALLER $EXEFILE ); then
+        rm -rf $COMPDIR
+      else
+        echo "possible permission problem: $EXEFILE" | tee -a $LOGFILE
+        rm $COMPDIR/*
+      fi
+    else
+      rm $SMALLER
+    fi
+  done
+
+  if [ -d "$COMPDIR" ]; then
+    echo "upx failed to compress $EXEFILE"      | tee -a $LOGFILE
+  else
+    echo "upx compressed $EXEFILE successfully" | tee -a $LOGFILE
+  fi
+}
+
+function decompress_exe ()
+{
+  local EXEFILE=$1
+  upx -d $EXEFILE
+  local RETURNVAL=$?
+  case $RETURNVAL in
+    0) echo "upx decompressed $EXEFILE successfully"         | tee -a $LOGFILE
+       ;;
+    1) echo "upx failed to decompress $EXEFILE"              | tee -a $LOGFILE
+       ;;
+    2) echo "$EXEFILE was not compressed with upx"           | tee -a $LOGFILE
+       ;;
+    *) echo "upx -d $EXEFILE gave unknown error: $RETURNVAL" | tee -a $LOGFILE
+  esac
+}
+
+function find_exes ()
+{
+  cat "/var/log/sorcery/install/$1" | 
+  while read FILE; do
+    if [ -x "$FILE" ] && [ -f "$FILE" ]; then
+      case $MODE in
+        compress)   compress_exe $FILE
+                    ;;
+        decompress) decompress_exe $FILE
+      esac
+    fi
+  done
+}
+
+function list_compressed_exes ()
+{
+  local EXEFILE
+
+  FILELIST="$FILELISTDIR/$1"
+  [ -a "$FILELIST" ] && rm $FILELIST
+  cat "/var/log/sorcery/install/$1" | 
+  while read EXEFILE; do
+    if ( upx -tqq $EXEFILE ); then
+      echo $EXEFILE | tee -a $FILELIST
+    fi
+  done
+}
+
+function help ()
+{
+cat << EOF
+
+de/compresses all the binaries installed by the spell with upx
+
+Usage:	upx_spell	[parameters]	[spell]
+
+Parameters:
+-c	compress binaries \(DEFAULT\)
+-d	decompress binaries
+-l	list binaries
+EOF
+
+exit 1
+}
+
+function main ()
+{
+  TMPDIR="/tmp/upx_spell/"
+  COMPDIR="$TMPDIR/compressing/"
+  LOGFILE="$TMPDIR/log"
+  FILELISTDIR="/var/log/sorcery/upxcompressed/"
+  FILELIST=""
+
+  mkdir -p $FILELISTDIR
+
+  if ! [ -d $FILELISTDIR ]; then
+    echo "you do not have sufficient privaleges to create $FILELISTDIR"
+    exit 1
+  fi
+
+  if [ "$1" == "-c" ]; then
+    MODE="compress"
+    shift
+  elif [ "$1" == "-d" ]; then
+    MODE="decompress"
+    shift
+  elif [ "$1" == "-l" ]; then
+    MODE="list"
+    shift
+  else
+    MODE="compress"
+  fi
+
+
+  while [ -n "$1" ]; do
+    if [ -f "/var/log/sorcery/install/$1" ]; then
+      case "$MODE" in
+        compress)   find_exes "$1"
+                    list_compressed_exes "$1"
+                    ;;
+        decompress) find_exes "$1"
+                    list_compressed_exes "$1"
+                    ;;
+        list)       list_compressed_exes "$1"
+                    ;;
+        *)          echo unknown mode
+                    exit 1
+      esac
+    else
+      echo invalid spell $1 | tee -a $LOGFILE
+    fi
+    shift
+  done
+
+  rm -rf $TMPDIR
+}
+
+if [ -z $1 ]; then
+  help
+else
+  main $@
+fi
+
+

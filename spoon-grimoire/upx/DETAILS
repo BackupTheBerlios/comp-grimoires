@@ -1,0 +1,14 @@
+   VERSION=( "1.24" )
+  CATEGORY="archive"
+ ATTRIBUTE="console"
+  HOMEPAGE="http://upx.sourceforge.net"
+    SOURCE="upx-${VERSION}-linux"
+       URL="http://upx.sourceforge.net/download/"
+     SHORT="UPX is a high-performance executable packer"
+cat << EOF
+UPX is a free, portable, extendable, high-performance executable
+packer for several different executable formats. It achieves an
+excellent compression ratio and offers very fast decompression.
+Your executables suffer no memory overhead or other drawbacks.
+The binary version is used because it provides better compression ratios.
+EOF
