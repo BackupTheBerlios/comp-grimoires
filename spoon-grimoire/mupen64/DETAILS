@@ -1,0 +1,13 @@
+  VERSION="0.3"
+ CATEGORY="game emulator"
+ATTRIBUTE="x11"
+   SOURCE="mupen64-${VERSION}.tar.bz2"
+      URL="http://mupen64.emulation64.com/files/"
+ HOMEPAGE="http://mupen64.emulation64.com/"
+    SHORT="MUPEN64 is a n64 emulator designed to be multi-OS"
+ ESTIMATE="5"
+cat << EOF
+MUPEN64 is a n64 emulator designed to be multi-OS.
+It is developped on/for Linux. It has many things already
+implemented such as a dynamic recompilator.
+EOF

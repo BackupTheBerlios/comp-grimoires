@@ -1,0 +1,5 @@
+cat $INSTALL_LOGS/$BSPELL |
+grep -v "\.epsxerc" |
+grep -v "\.cfg" > temp.log
+
+mv temp.log $INSTALL_LOGS/$BSPELL

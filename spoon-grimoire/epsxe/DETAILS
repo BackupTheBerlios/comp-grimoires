@@ -1,0 +1,23 @@
+  VERSION="160"
+ CATEGORY="game emulator"
+ATTRIBUTE="x11"
+SOURCE[0]="epsxe${VERSION}lin.zip"
+SOURCE[1]="gpupetemesagl174.tar.gz"
+SOURCE[2]="peops/PeopsSoftGpu115.tar.gz"
+SOURCE[3]="peops/PeopsSpu107.tar.gz"
+   URL[0]="http://download.epsxe.com/files/"
+   URL[1]="http://home.t-online.de/home/PeteBernert/"
+   URL[2]="$SOURCEFORGE_URL"
+   URL[3]="$SOURCEFORGE_URL"
+    SHORT="ePSXe is a playstation emulator."
+ ESTIMATE="5"
+cat << EOF
+ePSXe is a playstation emulator.
+A valid playstation bios is required (google for it)
+
+includes the following plugins:
+Pete's MesaGL plugin
+P.E.Op.S. software GPU
+P.E.Op.S. SPU
+(looking for a decent input plugin)
+EOF

@@ -1,0 +1,7 @@
+cd $BUILD_DIR
+unpack ${SOURCE[0]}
+
+cd plugins
+unpack ${SOURCE[1]}
+unpack ${SOURCE[2]}
+unpack ${SOURCE[3]}

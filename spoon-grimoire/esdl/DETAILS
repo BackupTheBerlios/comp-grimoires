@@ -1,0 +1,14 @@
+   VERSION=( "0.93.0909" )
+  CATEGORY="library"
+ ATTRIBUTE="console x11"
+  HOMEPAGE="http://esdl.sourceforge.net"
+    SOURCE="esdl/esdl-${VERSION}.src"
+       URL="$SOURCEFORGE_URL"
+       REQ="Erlang SDL"
+# FRESHMEAT=""
+#  ESTIMATE=""
+     SHORT="esdl is SDL and Opengl binding for Erlang"
+cat << EOF
+esdl is a library that gives you access to SDL and Opengl
+functionality in your erlang program. 
+EOF

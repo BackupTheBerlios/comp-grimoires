@@ -1,0 +1,13 @@
+   VERSION=( "0.98.15a" )
+  CATEGORY="graphic-editor"
+ ATTRIBUTE="x11"
+  HOMEPAGE="http://www.wings3d.com"
+    SOURCE="wings/wings-$VERSION"
+       URL="$SOURCEFORGE_URL"
+       REQ="esdl"
+# FRESHMEAT=""
+#  ESTIMATE=""
+     SHORT="Wings 3D is a polygon mesh modeler inspired by Nendo from Izware."
+cat << EOF
+Wings 3D is a polygon mesh modeler inspired by Nendo from Izware.
+EOF
