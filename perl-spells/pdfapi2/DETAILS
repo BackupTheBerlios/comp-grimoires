@@ -1,0 +1,15 @@
+   VERSION=( "0.2.3.8" )
+  CATEGORY="library"
+ ATTRIBUTE="development"
+  HOMEPAGE="http://pdfapi2.sourceforge.net"
+       URL="$SOURCEFORGE_URL"
+    SOURCE="pdfapi2/PDF-API2-$VERSION"
+       REQ="perl zlib Compress-Zlib"
+  ESTIMATE="63"
+ FRESHMEAT="pdf2api"
+     SHORT="This module provides a Perl interface to most of the zlib compression library"
+cat << EOF
+This module provides a Perl interface to most of the zlib compression
+library.  For more details see the pod documentation embedded in the
+file Zlib.pm.
+EOF
